@@ -13,10 +13,10 @@ function App() {
     ])
 
     return (
-        <MyContext.Provider value={ { appName: 'Next-gen Social Media', posts: posts } }>
+        <MyContext.Provider value={ { appName: 'Next-gen Social Media', posts: posts, setPosts: setPosts } }>
             <Header />
-            <Posts />
             <CreatePost />
+            <Posts />
         </MyContext.Provider>
     )
 }
