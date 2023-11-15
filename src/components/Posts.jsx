@@ -1,12 +1,7 @@
-import { useContext } from "react"
-import { MyContext } from "../App"
-
-export default function Posts() {
-    const context = useContext(MyContext)
-
+export default function Posts({ posts }) {
     return (
         <>
-            {context.posts.map(post => {
+            {posts.map(post => {
                 return (
                     <div className="card">
                         <h3>{post.title}</h3>

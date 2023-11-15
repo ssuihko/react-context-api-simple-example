@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import { MyContext } from "../App.jsx";
+import { useState } from "react";
 
 function getInitialPost() {
     const title = localStorage.getItem("title")
@@ -11,9 +10,8 @@ function getInitialPost() {
     }
 }
 
-export default function CreatePost() {
+export default function CreatePost({ posts, setPosts }) {
     const [post, setPost] = useState(getInitialPost())
-    const context = useContext(MyContext)
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -26,7 +24,7 @@ export default function CreatePost() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        context.setPosts([...context.posts, post])
+        setPosts([...posts, post])
         localStorage.clear()
         setPost(getInitialPost)
 
