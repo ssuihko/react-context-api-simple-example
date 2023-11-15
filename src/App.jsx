@@ -1,7 +1,8 @@
 import { useState, createContext } from 'react'
+import CreatePost from './components/CreatePost.jsx';
+import Header from './components/Header.jsx'
+import Posts from './components/Posts.jsx'
 import './App.css'
-import Posts from './Posts'
-import Header from './Header'
 
 const MyContext = createContext()
 
@@ -15,6 +16,7 @@ function App() {
         <MyContext.Provider value={ { appName: 'Next-gen Social Media', posts: posts } }>
             <Header />
             <Posts />
+            <CreatePost />
         </MyContext.Provider>
     )
 }
