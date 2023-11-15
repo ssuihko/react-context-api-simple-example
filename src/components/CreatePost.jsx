@@ -1,17 +1,12 @@
 import { useState } from "react";
 
-function getInitialPost() {
-    const title = localStorage.getItem("title")
-    const content = localStorage.getItem("content")
-
-    return {
-      title: title || '',
-      content: content || '',
-    }
+const INITIAL_POST = {
+    title: '',
+    content: '',
 }
 
 export default function CreatePost({ posts, setPosts }) {
-    const [post, setPost] = useState(getInitialPost())
+    const [post, setPost] = useState(INITIAL_POST)
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -19,15 +14,12 @@ export default function CreatePost({ posts, setPosts }) {
           ...post,
           [name]: value,
         })
-        localStorage.setItem(name, value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         setPosts([...posts, post])
-        localStorage.clear()
-        setPost(getInitialPost)
-
+        setPost(INITIAL_POST)
     }
 
     return (
