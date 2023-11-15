@@ -1,26 +1,35 @@
 import { useContext, useState } from "react";
 import { MyContext } from "../App.jsx";
 
-const INITIAL_POST = {
-  title: '',
-  content: '',
+function getInitialPost() {
+    const title = localStorage.getItem("title")
+    const content = localStorage.getItem("content")
+
+    return {
+      title: title || '',
+      content: content || '',
+    }
 }
 
 export default function CreatePost() {
-    const [post, setPost] = useState(INITIAL_POST)
+    const [post, setPost] = useState(getInitialPost())
     const context = useContext(MyContext)
 
     const handleChange = (e) => {
+        const { name, value } = e.target
         setPost({
           ...post,
-          [e.target.name]: e.target.value,
+          [name]: value,
         })
+        localStorage.setItem(name, value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         context.setPosts([...context.posts, post])
-        setPost(INITIAL_POST)
+        localStorage.clear()
+        setPost(getInitialPost)
+
     }
 
     return (
