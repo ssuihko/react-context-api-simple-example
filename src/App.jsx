@@ -22,9 +22,9 @@ function App() {
         setPosts: setPosts,
       }}
     >
-      <Header appName={APP_NAME} />
-      <CreatePost posts={posts} setPosts={setPosts} />
-      <Posts posts={posts} />
+      <Header />
+      <CreatePost />
+      <Posts />
     </AppContext.Provider>
   );
 }
