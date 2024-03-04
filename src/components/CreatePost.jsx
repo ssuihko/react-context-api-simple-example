@@ -1,14 +1,22 @@
 import { useState, useContext } from "react";
 import { AppContext } from "../App";
 
-function getInitPost() {
-  const title = localStorage.getItem("title");
-  const content = localStorage.getItem("content");
+const INITIAL_POST = {
+  title: "",
+  content: "",
+};
 
-  return {
-    title: title || "",
-    content: content || "",
-  };
+function getInitPost() {
+  console.log("here!!!!");
+  const formVal = localStorage.getItem("createPostForm");
+
+  if (formVal != null) {
+    console.log("here?", formVal);
+    return JSON.parse(formVal);
+  }
+
+  console.log("here!");
+  return { ...INITIAL_POST };
 }
 
 export default function CreatePost() {
@@ -17,18 +25,24 @@ export default function CreatePost() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setPost({
+
+    const updatedPost = {
       ...post,
       [name]: value,
-    });
-    localStorage.setItem(name, value);
+    };
+
+    setPost(updatedPost);
+    localStorage.setItem("createPostForm", JSON.stringify(updatedPost));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     context.setPosts([...context.posts, post]);
-    localStorage.clear();
-    setPost(getInitPost);
+    setPost(INITIAL_POST);
+
+    localStorage.removeItem("createPostForm");
+    // localStorage.clear();
+    localStorage.setItem("createPostForm", JSON.stringify(INITIAL_POST));
   };
 
   return (
